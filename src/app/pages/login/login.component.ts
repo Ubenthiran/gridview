@@ -9,21 +9,23 @@ export class LoginComponent {
   
   fileContent: string = '';
   keys:any = [];
-  async onChange(fileList: FileList): void {
-    let file = fileList[0];
-    let fileReader: FileReader = new FileReader();
-    let self = this;
-	this.keys = [];
-	await fileReader.readAsText(file);
-    fileReader.onloadend = function(x) {
-      self.fileContent = JSON.parse(fileReader.result);
-		for(let key in self.fileContent[0]){
-          self.keys.push(key);
-	   }
-    }
-   
-	
+  onChange(fileList: FileList) {
+	 
+     let file = fileList[0];
+			let fileReader: FileReader = new FileReader();
+			let self = this;
+			this.keys = [];
+			fileReader.readAsText(file); 
+			fileReader.onloadend = function(x) {
+			  self.fileContent = JSON.parse(fileReader.result as string);
+			    console.log(Object.keys(self.fileContent[0]));
+				self.keys = Object.keys(self.fileContent[0]);
+				/* for(let key in self.fileContent[0]){
+				  self.keys.push(key);
+			   } */
+			}	
 	
   }
 
 }
+347588296
